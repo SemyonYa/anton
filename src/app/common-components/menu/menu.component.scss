@@ -1,0 +1,17 @@
+.wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: white;
+
+  .item {
+    flex: 0 0 25%;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: .5s;
+
+    &:hover {
+      color: darkred;
+    }
+  }
+}
