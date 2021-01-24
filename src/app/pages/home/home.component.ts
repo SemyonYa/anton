@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { projectInfoAnimation } from 'src/app/animations/project-info.animation';
+import { Menu } from 'src/app/models/menu.enum';
+import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
   selector: 'app-home',
@@ -10,17 +12,23 @@ import { projectInfoAnimation } from 'src/app/animations/project-info.animation'
 export class HomeComponent implements OnInit {
   opened: number = 0;
   animationTime = 1000;
-  menuHeight = 60;
+  menuHeight = 40;
 
   @ViewChild('projectInfo') projectInfoTemplate: TemplateRef<any>;
 
-  constructor(private host: ElementRef, private renderer: Renderer2) { }
+  constructor(
+    private host: ElementRef,
+    private renderer: Renderer2,
+    private menuService: MenuService
+  ) { }
 
   ngOnInit(): void {
   }
 
   // TODO: split on funcs
   open(item: number, e: MouseEvent) {
+    this.menuService.goTo(Menu.Portfolio);
+
     this.opened = this.opened == item ? 0 : item;
     const currentRect = (e.currentTarget as any).getBoundingClientRect();
     document.querySelector('body').style.overflow = 'hidden';
@@ -56,6 +64,8 @@ export class HomeComponent implements OnInit {
         console.log("🚀 ~ file: home.component.ts ~ line 51 ~ HomeComponent ~ setTimeout ~ this.projectInfoTemplate.elementRef.nativeElement", this.projectInfoTemplate.elementRef)
 
         this.renderer.listen(newProject, 'click', (e) => {
+          this.menuService.goTo(Menu.Home);
+
           this.renderer.setStyle(newProject, 'top', `${currentRect.top}px`);
           this.renderer.setStyle(newProject, 'width', `${currentRect.width}px`);
           this.renderer.setStyle(newProject, 'left', `${currentRect.left}px`);
