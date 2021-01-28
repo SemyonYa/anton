@@ -1,0 +1,43 @@
+.wrap {
+  border-top: solid 3px var(--text-color);
+  display: flex;
+  flex-direction: column;
+  padding: 55px 0 20px;
+  color: var(--text-color);
+  font-size: 1.6vw;
+  font-weight: 400;
+  line-height: 1.2;
+
+  .line {
+    display: flex;
+
+    div:nth-child(1) {
+      flex: 0 0 40%;
+    }
+
+    div:nth-child(2) {
+      flex: 1 0 30%;
+    }
+
+    div:nth-child(3) {
+      flex: 1 0 30%;
+    }
+
+    a {
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    &.first {
+      padding-bottom: 30px;
+    }
+
+    &.second {
+      padding-bottom: 120px;
+    }
+
+    &.third {
+      font-size: 24px;
+    }
+  }
+}
