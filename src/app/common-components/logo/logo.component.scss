@@ -1,0 +1,8 @@
+img {
+  width: 300px;
+  transition: .6s ease-in-out;
+
+  &.small {
+    width: 50px;
+  }
+}

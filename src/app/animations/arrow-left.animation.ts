@@ -1,13 +1,13 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 
-export const projectInfoAnimation =
-    trigger('projectInfoAnimation', [
+export const arrowLeftAnimation =
+    trigger('arrowLeftAnimation', [
         transition(':enter', [
             style({
-                transform: 'translateY(30px)',
+                transform: 'translateX(-30px)',
                 opacity: 0,
             }),
-            animate('.3s ease-out',
+            animate('.6s .6s ease-out',
                 style({
                     transform: '*',
                     opacity: '*'
@@ -15,12 +15,12 @@ export const projectInfoAnimation =
         ]),
         transition(':leave', [
             style({
-                transform: '*',
+                // transform: '*',
                 opacity: '*'
             }),
-            animate('0.3s ease-in',
+            animate('0.9s ease-in',
                 style({
-                    transform: 'translateY(30px)',
+                    // transform: 'translateY(30px)',
                     opacity: 0,
                 }))
         ])

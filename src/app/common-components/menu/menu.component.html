@@ -1,3 +1,19 @@
 <div class="wrap">
-  <div *ngFor="let item of [1,2,3,4]" class="item">Item #{{item}}</div>
+  <div [ngClass]="{'item': true, 'about': true, 'active': activeItem == 1}" [routerLink]="['/about']" (click)="goTo(1)">
+    О нас
+  </div>
+  <div *ngIf="isPortfolio" [ngClass]="{'item': true, 'portfolio': true, 'active': true}" [routerLink]="['/portfolio']"
+    (click)="goTo(2)" @portfolioMenuAnimation>
+    Портфолио
+  </div>
+  <div [ngClass]="{'item': true, 'concepts': true, 'active': activeItem == 3, 'moved': isMenuActive}"
+    [routerLink]="['/concepts']" (click)="goTo(3)">
+    Концепты
+  </div>
+  <div [ngClass]="{'item': true, 'contacts': true, 'active': activeItem == 4}" [routerLink]="['/contacts']"
+    (click)="goTo(4)">
+    Контакты
+  </div>
+  <img class="insta" src="/assets/svg/insta.svg">
+  <img class="fb" src="/assets/svg/fb.svg">
 </div>

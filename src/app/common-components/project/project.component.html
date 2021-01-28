@@ -1,0 +1,30 @@
+<div [ngClass]="{'wrap': true, 'full': fullScreenAfter}">
+  <div id="image{{isOpened ? '--' : ''}}{{project.id}}" class="img" style="background-image: url({{project.img}})">
+  </div>
+  <!-- SMALL -->
+  <div *ngIf="!fullScreenBefore" class="brief" @projectBriefAnimation>
+    <div>
+      <h4>{{project.title}}</h4>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ipsam, ad repudiandae cupiditate officia quam
+        ipsa! Aut tempore, modi nisi aliquid, nostrum distinctio quia sed, facere quae laboriosam repellat ipsam...
+      </p>
+    </div>
+    <button>more...</button>
+  </div>
+
+  <!-- FULL -->
+  <h2 id="title{{isOpened ? '--' : ''}}{{project.id}}" *ngIf="fullScreenAfter" @projectTitleAnimation>{{project.title}}
+  </h2>
+  <div id="description{{isOpened ? '--' : ''}}{{project.id}}" #description *ngIf="fullScreenAfter" class="description"
+    @projectTitleAnimation>
+    <p>{{project.description}}</p>
+  </div>
+</div>
+
+<div *ngIf="fullScreenAfter" class="arrow-left" (click)="prev()" @arrowLeftAnimation>
+  <img src="/assets/svg/chevron-forward.svg" alt="">
+</div>
+<div *ngIf="fullScreenAfter" class="arrow-right" (click)="next()" @arrowRightAnimation>
+  <img src="/assets/svg/chevron-forward.svg" alt="">
+</div>
