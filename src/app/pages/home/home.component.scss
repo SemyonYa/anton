@@ -3,25 +3,74 @@
 }
 
 .wrap {
+  transition: .6s;
+
+  h2 {
+    margin-left: 40%;
+    margin-bottom: 5vw;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 1.2;
+  }
+
+  .line {
+    padding: 10px;
+    margin-bottom: 3vw;
+
+    &.full {}
+
+    &.two-50-38 {
+      display: flex;
+      justify-content: space-between;
+
+      app-project:first-child {
+        flex: 0 0 50%;
+      }
+
+      app-project:last-child {
+        flex: 0 0 38%;
+      }
+    }
+
+    &.four-18-18-25-25 {
+      display: flex;
+      justify-content: flex-start;
+
+      app-project:nth-child(1),
+      app-project:nth-child(2) {
+        flex: 0 0 18vw;
+        margin-right: 20px;
+      }
+
+      app-project:nth-child(3) {
+        flex: 0 0 25vw;
+        margin-right: calc(14vw - 60px);
+      }
+
+      app-project:nth-child(4) {
+        flex: 0 0 25vw;
+        justify-self: flex-end;
+      }
+
+    }
+  }
 
   .list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 0 20px;
-    transition: .6s;
+    padding: 0 10px;
+    margin-top: 100px;
   }
+
 }
 
 app-project {
   display: flex;
   flex-direction: row;
   gap: 40px;
-  border-radius: 12px;
-  // box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .12);
   overflow: hidden;
-  min-height: 100px;
-  background-color: white;
+  margin-bottom: 40px;
+  background-color: var(--background-color);
   box-sizing: border-box;
   transition: var(--open-project-transition);
 }

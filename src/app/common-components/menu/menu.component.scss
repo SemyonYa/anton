@@ -4,7 +4,7 @@
   height: 100%;
   position: relative;
   align-items: center;
-  background-color: white;
+  background-color: var(--background-color);
   border-bottom: solid 3px var(--text-color);
 
   .item {

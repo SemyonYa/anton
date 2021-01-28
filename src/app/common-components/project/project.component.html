@@ -1,25 +1,32 @@
 <div [ngClass]="{'wrap': true, 'full': fullScreenAfter}">
-  <div id="image{{isOpened ? '--' : ''}}{{project.id}}" class="img" style="background-image: url({{project.img}})">
-  </div>
   <!-- SMALL -->
-  <div *ngIf="!fullScreenBefore" class="brief" @projectBriefAnimation>
-    <div>
-      <h4>{{project.title}}</h4>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ipsam, ad repudiandae cupiditate officia quam
-        ipsa! Aut tempore, modi nisi aliquid, nostrum distinctio quia sed, facere quae laboriosam repellat ipsam...
-      </p>
+  <div
+    [ngClass]="{'small': true, 'row-txt30-img70': type == 0, 'col-50': type == 1, 'col-38': type == 2, 'col-img100-txt78': type == 3, 'col-img18-square': type == 4, 'col-img18-long': type == 5, 'col-img25-square': type == 6}">
+    <div class="title-img">
+      <div id="title{{isOpened ? '--' : '-'}}{{project.id}}" class="title">
+        <h4>{{project.title}}</h4>
+        <div *ngIf="!fullScreenAfter" class="sub">
+          <span>{{project.city}}</span>
+          <span>{{project.year}}</span>
+        </div>
+      </div>
+      <div id="image{{isOpened ? '--' : '-'}}{{project.id}}" class="img" style="background-image: url({{project.img}})">
+      </div>
     </div>
-    <button>more...</button>
+    <div *ngIf="!fullScreenBefore" class="brief" @projectBriefAnimation>
+      {{project.type == 3 ? project.description : project.brief}}
+    </div>
   </div>
-
   <!-- FULL -->
-  <h2 id="title{{isOpened ? '--' : ''}}{{project.id}}" *ngIf="fullScreenAfter" @projectTitleAnimation>{{project.title}}
-  </h2>
-  <div id="description{{isOpened ? '--' : ''}}{{project.id}}" #description *ngIf="fullScreenAfter" class="description"
+  <div *ngIf="fullScreenAfter" id="description{{isOpened ? '--' : '-'}}{{project.id}}" class="description"
     @projectTitleAnimation>
     <p>{{project.description}}</p>
+    <p>{{project.description}}</p>
+    <p>{{project.description}}</p>
+    <p>{{project.description}}</p>
+    <p>{{project.description}}</p>
   </div>
+  <app-footer *ngIf="fullScreenAfter" @projectTitleAnimation></app-footer>
 </div>
 
 <div *ngIf="fullScreenAfter" class="arrow-left" (click)="prev()" @arrowLeftAnimation>

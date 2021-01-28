@@ -1,5 +1,6 @@
 .wrap {
   padding-top: calc(var(--menu-height) + 40px);
+  background-color: var(--background-color);
 
   app-menu {
     position: fixed;

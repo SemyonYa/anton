@@ -9,7 +9,11 @@ import { Project } from '../models/project';
 export class DataService {
   projects$ = new BehaviorSubject<Project[]>(null);
 
-  text = `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa et, rerum impedit error atque pariatur illum
+  brief = `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa et, rerum impedit error atque pariatur illum
+  accusamus molestias unde praesentium doloremque omnis hic molestiae sapiente iusto vitae mollitia veniam a?
+  Optio ipsum maiores eligendi incidunt sit dolore nemo ullam, minima asperiores saepe error non nobis, pariatur
+  consequatur itaque delectus culpa, ducimus officiis.`;
+  description = `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa et, rerum impedit error atque pariatur illum
   accusamus molestias unde praesentium doloremque omnis hic molestiae sapiente iusto vitae mollitia veniam a?
   Optio ipsum maiores eligendi incidunt sit dolore nemo ullam, minima asperiores saepe error non nobis, pariatur
   consequatur itaque delectus culpa, ducimus officiis. Nobis molestias quidem provident quas. Enim, quibusdam fugit.
@@ -20,11 +24,15 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getProjects() {
-    const projects: Project[] = [1, 2, 3, 4, 5].map(p => new Project(
+    const projects: Project[] = [0, 1, 2, 3, 4, 5, 6].map(p => new Project(
       p,
       `Title of Project #${p}`,
-      this.text,
-      `/assets/img/0${p}.jpg`
+      this.brief,
+      this.description,
+      `Large City #${p}`,
+      2020 - p,
+      `/assets/img/0${p}.jpg`,
+      p
     )
     );
     this.projects$.next(projects);

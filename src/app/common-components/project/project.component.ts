@@ -4,6 +4,7 @@ import { arrowLeftAnimation } from 'src/app/animations/arrow-left.animation';
 import { arrowRightAnimation } from 'src/app/animations/arrow-right.animation';
 import { projectBriefAnimation } from 'src/app/animations/project-brief.animation';
 import { projectDescriptionAnimation } from 'src/app/animations/project-description.animation';
+import { projectTitleDivAnimation } from 'src/app/animations/project-title-div.animation';
 import { projectTitleAnimation } from 'src/app/animations/project-title.animation';
 import { MENU_HEIGHT } from 'src/app/constants/constants';
 import { Project } from 'src/app/models/project';
@@ -13,27 +14,26 @@ import { Project } from 'src/app/models/project';
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss'],
   animations: [
+    projectTitleDivAnimation,
+    projectTitleAnimation,
     projectBriefAnimation,
     projectDescriptionAnimation,
-    projectTitleAnimation,
     arrowLeftAnimation,
     arrowRightAnimation,
   ]
 })
 export class ProjectComponent implements OnInit {
   @Input() project: Project;
+  @Input() type: number;
   @Input() isOpened$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   projects: Project[];
   isOpened = false;
-  currentRect: { top: number, width: number, left: number, bottom: number };
+  currentRect: { top: number, width: number, left: number, right: number, bottom: number };
   fullScreenBefore = false;
   fullScreenAfter = false;
   isFake = false;
   changeBlocked: boolean = false;
 
-  // @ViewChild('title') titleElem: ElementRef;
-  // @ViewChild('description') descriptionElem: ElementRef;
-  // @ViewChild('img') imgElem: ElementRef;
   constructor(
     private renderer: Renderer2,
     private elementRef: ElementRef
@@ -53,9 +53,10 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.currentRect) {
+      console.log("🚀 ~ file: project.component.ts ~ line 56 ~ ProjectComponent ~ ngOnInit ~ this.currentRect", this.currentRect)
       this.renderer.setStyle(this.elementRef.nativeElement, 'position', `fixed`);
       this.renderer.setStyle(this.elementRef.nativeElement, 'top', `${this.currentRect.top}px`);
-      this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${this.currentRect.width}px`);
+      this.renderer.setStyle(this.elementRef.nativeElement, 'right', `${this.currentRect.right}px`);
       this.renderer.setStyle(this.elementRef.nativeElement, 'left', `${this.currentRect.left}px`);
       this.renderer.setStyle(this.elementRef.nativeElement, 'bottom', `${this.currentRect.bottom}px`);
       this.renderer.setStyle(this.elementRef.nativeElement, 'transition', '1s');
@@ -97,14 +98,16 @@ export class ProjectComponent implements OnInit {
   }
 
   change(elem: Element, isPrev: boolean = true) {
-    this.renderer.setStyle(elem, 'transition', '.2s');
+    const outTransition = 200;
+    const inTransition = 500;
+    this.renderer.setStyle(elem, 'transition', `${outTransition}ms`);
     this.renderer.setStyle(elem, 'opacity', '0');
     this.renderer.setStyle(elem, 'transform', `translateX(${25 * (isPrev ? 1 : -1)}px)`);
     const currentIndex = this.projects.indexOf(this.project);
     setTimeout(() => {
       this.renderer.setStyle(elem, 'transform', `translateX(${-100 * (isPrev ? 1 : -1)}px)`);
-      this.renderer.setStyle(elem, 'background-size', '150% auto');
-      this.renderer.setStyle(elem, 'transition', '.5s');
+      this.renderer.setStyle(elem, 'background-size', '110% auto');
+      this.renderer.setStyle(elem, 'transition', `${inTransition}ms`);
       setTimeout(() => {
         if (isPrev) {
           this.project = currentIndex > 0 ? this.projects[currentIndex - 1] : this.projects[this.projects.length - 1];
@@ -115,8 +118,8 @@ export class ProjectComponent implements OnInit {
         this.renderer.setStyle(elem, 'transform', 'translateX(0)');
         this.renderer.setStyle(elem, 'background-size', '100% auto');
         this.changeBlocked = false;
-      }, 500);
-    }, 200);
+      }, inTransition);
+    }, outTransition);
   }
 
   close() {

@@ -1,8 +1,33 @@
-<div class="wrap" @pageAnimation>
-  <div class="list" #list>
-    <app-project *ngFor="let project of projects" [project]="project" (click)="openProject(project, $event)">
+<div #wrap class="wrap" @pageAnimation>
+  <h2>Бюро дизайна<br>и архитектуры</h2>
+  <div class="line full">
+    <app-project [project]="projects[0]" [type]="projects[0].type" (click)="openProject(projects[0], $event)">
     </app-project>
   </div>
+  <div class="line two-50-38">
+    <app-project [project]="projects[1]" [type]="projects[1].type" (click)="openProject(projects[1], $event)">
+    </app-project>
+    <app-project [project]="projects[2]" [type]="projects[2].type" (click)="openProject(projects[2], $event)">
+    </app-project>
+  </div>
+  <div class="line full">
+    <app-project [project]="projects[3]" [type]="projects[3].type" (click)="openProject(projects[3], $event)">
+    </app-project>
+  </div>
+  <div class="line four-18-18-25-25">
+    <app-project [project]="projects[4]" [type]="projects[4].type" (click)="openProject(projects[4], $event)">
+    </app-project>
+    <app-project [project]="projects[5]" [type]="projects[5].type" (click)="openProject(projects[5], $event)">
+    </app-project>
+    <app-project [project]="projects[6]" [type]="projects[6].type" (click)="openProject(projects[6], $event)">
+    </app-project>
+    <app-project [project]="projects[6]" [type]="projects[6].type" (click)="openProject(projects[6], $event)">
+    </app-project>
+  </div>
+  <!-- <div class="list">
+    <app-project *ngFor="let project of projects" [project]="project" (click)="openProject(project, $event)">
+    </app-project>
+  </div> -->
 </div>
 
 <ng-container #fakeProject></ng-container>

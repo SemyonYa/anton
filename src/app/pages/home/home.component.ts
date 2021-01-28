@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   animationTime: number = 1000;
   isPortfolio: boolean = false;
 
-  @ViewChild('list') listElem: ElementRef;
+  @ViewChild('wrap') wrapElem: ElementRef;
   @ViewChild('fakeProject', { read: ViewContainerRef }) fakeProjectRef: ViewContainerRef;
 
   constructor(
@@ -66,8 +66,12 @@ export class HomeComponent implements OnInit {
       top: currentRect.top,
       width: currentRect.width,
       left: currentRect.left,
-      bottom: window.innerHeight - currentRect.bottom
+      bottom: window.innerHeight - currentRect.bottom,
+      right: window.innerWidth - currentRect.right,
     };
+    console.log("🚀 ~ file: home.component.ts ~ line 71 ~ HomeComponent ~ openProject ~ currentRect", currentRect)
+    // TODO: Set project.type
+    this.projectRef.instance.type = project.type;
     this.projectRef.instance.isOpened$.next(true);
     this.hideItems();
   }
@@ -77,19 +81,20 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.fakeProjectRef.clear();
       this.showItems();
+      document.querySelector('body').style.overflow = 'auto';
     }, 600);
   }
 
   hideItems() {
-    this.renderer.setStyle(this.listElem.nativeElement, 'opacity', '0');
+    this.renderer.setStyle(this.wrapElem.nativeElement, 'opacity', '0');
     setTimeout(() => {
-      this.renderer.setStyle(this.listElem.nativeElement, 'transform', 'translateY(30px)');
+      this.renderer.setStyle(this.wrapElem.nativeElement, 'transform', 'translateY(30px)');
     }, 1000);
   }
 
   showItems() {
-    this.renderer.setStyle(this.listElem.nativeElement, 'opacity', '1');
-    this.renderer.setStyle(this.listElem.nativeElement, 'transform', 'translateY(0px)');
+    this.renderer.setStyle(this.wrapElem.nativeElement, 'opacity', '1');
+    this.renderer.setStyle(this.wrapElem.nativeElement, 'transform', 'translateY(0px)');
   }
 
   // TODO: split on funcs
