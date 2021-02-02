@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Menu } from './models/menu.enum';
+import { DataService } from './services/data.service';
 import { MenuService } from './services/menu.service';
 
 @Component({
@@ -13,8 +14,12 @@ export class AppComponent {
   isSmallLogo = false;
   title = 'anton';
 
-  constructor(private router: Router, private menuService: MenuService) {
-
+  constructor(
+    private router: Router,
+    private menuService: MenuService,
+    private dataService: DataService
+  ) {
+    dataService.getProjects();
     router.events.subscribe(
       e => {
         if (e instanceof NavigationEnd) {

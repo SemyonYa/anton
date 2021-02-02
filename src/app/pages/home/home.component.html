@@ -1,28 +1,36 @@
 <div #wrap class="wrap" @pageAnimation>
   <h2>Бюро дизайна<br>и архитектуры</h2>
   <div class="line full">
-    <app-project [project]="projects[0]" [type]="projects[0].type" (click)="openProject(projects[0], $event)">
-    </app-project>
+    <app-project-info [project]="projects[0]" [type]="projects[0].type" [routerLink]="['/project/' + projects[0].id]"
+      routerLinkActive="router-link-active" (click)="openProject(projects[0], $event)">
+    </app-project-info>
   </div>
   <div class="line two-50-38">
-    <app-project [project]="projects[1]" [type]="projects[1].type" (click)="openProject(projects[1], $event)">
-    </app-project>
-    <app-project [project]="projects[2]" [type]="projects[2].type" (click)="openProject(projects[2], $event)">
-    </app-project>
+    <app-project-info [project]="projects[1]" [type]="projects[1].type" [routerLink]="['/project/' + projects[1].id]"
+      routerLinkActive="router-link-active" (click)="openProject(projects[1], $event)">
+    </app-project-info>
+    <app-project-info [project]="projects[2]" [type]="projects[2].type" [routerLink]="['/project/' + projects[2].id]"
+      routerLinkActive="router-link-active" (click)="openProject(projects[2], $event)">
+    </app-project-info>
   </div>
   <div class="line full">
-    <app-project [project]="projects[3]" [type]="projects[3].type" (click)="openProject(projects[3], $event)">
-    </app-project>
+    <app-project-info [project]="projects[3]" [type]="projects[3].type" [routerLink]="['/project/' + projects[3].id]"
+      routerLinkActive="router-link-active" (click)="openProject(projects[3], $event)">
+    </app-project-info>
   </div>
   <div class="line four-18-18-25-25">
-    <app-project [project]="projects[4]" [type]="projects[4].type" (click)="openProject(projects[4], $event)">
-    </app-project>
-    <app-project [project]="projects[5]" [type]="projects[5].type" (click)="openProject(projects[5], $event)">
-    </app-project>
-    <app-project [project]="projects[6]" [type]="projects[6].type" (click)="openProject(projects[6], $event)">
-    </app-project>
-    <app-project [project]="projects[6]" [type]="projects[6].type" (click)="openProject(projects[6], $event)">
-    </app-project>
+    <app-project-info [project]="projects[4]" [type]="projects[4].type" [routerLink]="['/project/' + projects[4].id]"
+      routerLinkActive="router-link-active" (click)="openProject(projects[4], $event)">
+    </app-project-info>
+    <app-project-info [project]="projects[5]" [type]="projects[5].type" [routerLink]="['/project/' + projects[5].id]"
+      routerLinkActive="router-link-active" (click)="openProject(projects[5], $event)">
+    </app-project-info>
+    <app-project-info [project]="projects[6]" [type]="projects[6].type" [routerLink]="['/project/' + projects[6].id]"
+      routerLinkActive="router-link-active" (click)="openProject(projects[6], $event)">
+    </app-project-info>
+    <app-project-info [project]="projects[6]" [type]="projects[6].type" [routerLink]="['/project/' + projects[6].id]"
+      routerLinkActive="router-link-active" (click)="openProject(projects[6], $event)">
+    </app-project-info>
   </div>
 </div>
 

@@ -10,9 +10,9 @@ import { MENU_HEIGHT } from 'src/app/constants/constants';
 import { Project } from 'src/app/models/project';
 
 @Component({
-  selector: 'app-project',
-  templateUrl: './project.component.html',
-  styleUrls: ['./project.component.scss'],
+  selector: 'app-project-info',
+  templateUrl: './project-info.component.html',
+  styleUrls: ['./project-info.component.scss'],
   animations: [
     projectTitleDivAnimation,
     projectTitleAnimation,
@@ -22,12 +22,14 @@ import { Project } from 'src/app/models/project';
     arrowRightAnimation,
   ]
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponentInfo implements OnInit {
   @Input() project: Project;
   @Input() type: number;
-  @Input() isOpened$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isOpened$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   projects: Project[];
+  // TODO: to input()
   isOpened = false;
+  // TODO: to input()
   currentRect: { top: number, width: number, left: number, right: number, bottom: number };
   fullScreenBefore = false;
   fullScreenAfter = false;

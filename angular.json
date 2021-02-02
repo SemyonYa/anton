@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "anton"
+    }
+  },
+  "defaultProject": "anton",
+  "cli": {
+    "analytics": "4931a3aa-c006-4c97-8c9b-b7949428226e"
+  }
 }

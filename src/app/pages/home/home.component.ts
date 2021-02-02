@@ -2,12 +2,13 @@ import { Component, ComponentFactoryResolver, ComponentRef, ElementRef, OnInit, 
 import { BehaviorSubject } from 'rxjs';
 import { pageAnimation } from 'src/app/animations/page.animation';
 import { projectBriefAnimation } from 'src/app/animations/project-brief.animation';
-import { ProjectComponent } from 'src/app/common-components/project/project.component';
+import { ProjectComponentInfo } from 'src/app/common-components/project-info/project-info.component';
 import { MENU_HEIGHT } from 'src/app/constants/constants';
 import { Menu } from 'src/app/models/menu.enum';
 import { Project } from 'src/app/models/project';
 import { DataService } from 'src/app/services/data.service';
 import { MenuService } from 'src/app/services/menu.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ import { MenuService } from 'src/app/services/menu.service';
 export class HomeComponent implements OnInit {
   projects: Project[] = [];
   opened: number = 0;
-  projectRef: ComponentRef<ProjectComponent>;
+  projectRef: ComponentRef<ProjectComponentInfo>;
   animationTime: number = 1000;
   isPortfolio: boolean = false;
 
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private menuService: MenuService,
+    private projectService: ProjectService,
     private host: ElementRef,
     private renderer: Renderer2,
     private resolver: ComponentFactoryResolver,
@@ -44,7 +46,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.getProjects();
+    // this.dataService.getProjects();
     this.dataService.projects$.subscribe(
       ps => {
         this.projects = ps;
@@ -55,25 +57,34 @@ export class HomeComponent implements OnInit {
   openProject(project: Project, e: MouseEvent) {
     this.menuService.goTo(Menu.Portfolio);
     const currentRect = (e.currentTarget as any).getBoundingClientRect();
-    document.querySelector('body').style.overflow = 'hidden';
+    this.projectService.rect$.next(
+      {
+        top: currentRect.top,
+        width: currentRect.width,
+        left: currentRect.left,
+        bottom: window.innerHeight - currentRect.bottom,
+        right: window.innerWidth - currentRect.right,
+      }
+    );
+    // document.querySelector('body').style.overflow = 'hidden';
 
-    this.fakeProjectRef.clear();
-    let projectComponent = this.resolver.resolveComponentFactory(ProjectComponent);
-    this.projectRef = this.fakeProjectRef.createComponent(projectComponent);
-    this.projectRef.instance.project = project;
-    this.projectRef.instance.projects = this.projects;
-    this.projectRef.instance.currentRect = {
-      top: currentRect.top,
-      width: currentRect.width,
-      left: currentRect.left,
-      bottom: window.innerHeight - currentRect.bottom,
-      right: window.innerWidth - currentRect.right,
-    };
-    console.log("🚀 ~ file: home.component.ts ~ line 71 ~ HomeComponent ~ openProject ~ currentRect", currentRect)
-    // TODO: Set project.type
-    this.projectRef.instance.type = project.type;
-    this.projectRef.instance.isOpened$.next(true);
-    this.hideItems();
+    // this.fakeProjectRef.clear();
+    // let projectComponent = this.resolver.resolveComponentFactory(ProjectComponentInfo);
+    // this.projectRef = this.fakeProjectRef.createComponent(projectComponent);
+    // this.projectRef.instance.project = project;
+    // this.projectRef.instance.projects = this.projects;
+    // this.projectRef.instance.currentRect = {
+    //   top: currentRect.top,
+    //   width: currentRect.width,
+    //   left: currentRect.left,
+    //   bottom: window.innerHeight - currentRect.bottom,
+    //   right: window.innerWidth - currentRect.right,
+    // };
+    // console.log("🚀 ~ file: home.component.ts ~ line 71 ~ HomeComponent ~ openProject ~ currentRect", currentRect)
+    // // TODO: Set project.type
+    // this.projectRef.instance.type = project.type;
+    // this.projectRef.instance.isOpened$.next(true);
+    // this.hideItems();
   }
 
   closeProject() {

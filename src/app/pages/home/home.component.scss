@@ -23,11 +23,11 @@
       display: flex;
       justify-content: space-between;
 
-      app-project:first-child {
+      app-project-info:first-child {
         flex: 0 0 50%;
       }
 
-      app-project:last-child {
+      app-project-info:last-child {
         flex: 0 0 38%;
       }
     }
@@ -36,18 +36,18 @@
       display: flex;
       justify-content: flex-start;
 
-      app-project:nth-child(1),
-      app-project:nth-child(2) {
+      app-project-info:nth-child(1),
+      app-project-info:nth-child(2) {
         flex: 0 0 18vw;
         margin-right: 20px;
       }
 
-      app-project:nth-child(3) {
+      app-project-info:nth-child(3) {
         flex: 0 0 25vw;
         margin-right: calc(14vw - 60px);
       }
 
-      app-project:nth-child(4) {
+      app-project-info:nth-child(4) {
         flex: 0 0 25vw;
         justify-self: flex-end;
       }
@@ -64,7 +64,7 @@
 
 }
 
-app-project {
+app-project-info {
   display: flex;
   flex-direction: row;
   gap: 40px;
